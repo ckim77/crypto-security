@@ -15,7 +15,12 @@ module.exports = {
         
         if (users[i].username === username && existingPassword === true) {
           console.log("Success!");
-          res.status(200).send(users[i])
+          
+          let securedUsers = {... users[i]};
+          delete securedUsers.passwordHash;
+
+          res.status(200).send(securedUsers);
+  
         } else {
           res.status(400).send("User not found.")
         }
